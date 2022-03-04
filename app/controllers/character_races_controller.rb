@@ -19,6 +19,13 @@ class CharacterRacesController < ApplicationController
         end
     end
 
+    def destroy
+        race = CharacterRace.find(params[:id])
+        name = race.race_name
+        race.destroy
+        redirect_to character_races_path, notice: "#{name} deleted successfully"
+    end
+
     def race_params
         params.require(:character_race).permit(:race_name, :description, :traits)
     end

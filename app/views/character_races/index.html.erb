@@ -1,7 +1,7 @@
 <h1>Races</h1>
 
 <% @races.each do |race| %>
-    <h2><%= race.race_name %></h2>
+    <h2><%= link_to race.race_name, character_race_path(race.id)%></h2>
     <br>
     <h4> Description </h4>
     <p><%= race.description %></p>

@@ -1,6 +1,6 @@
 <h1><%= @race.race_name%></h1>
 <p>Race Description: <%= @race.description%></p>
 <p>Traits: <%= @race.traits%></p>
-<%= if current_user.admin? %>
+<% if current_user.admin? %>
     <%= link_to "Delete Race", @race, method: "delete", data: {confirm: "Are you sure you want to delete?"} %>
 <% end %>
