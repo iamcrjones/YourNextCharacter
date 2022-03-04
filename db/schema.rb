@@ -44,9 +44,9 @@ ActiveRecord::Schema.define(version: 2022_03_04_012911) do
   end
 
   create_table "character_races", force: :cascade do |t|
-    t.string "race_name"
-    t.string "description"
-    t.string "traits"
+    t.string "race_name", null: false
+    t.string "description", null: false
+    t.string "traits", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
