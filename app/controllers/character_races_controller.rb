@@ -1,6 +1,7 @@
 class CharacterRacesController < ApplicationController
     before_action :find_race, only:[:show]
     before_action :isAdmin , only: [:new, :create, :edit, :update, :destroy]
+
     def index
         @races = CharacterRace.all
     end
@@ -8,6 +9,7 @@ class CharacterRacesController < ApplicationController
     def new
         @race = CharacterRace.new
     end
+
     # Method for creating a race. Only an Admin is able to add or edit any data relating to races as they are set already.
     def create
         character_race = CharacterRace.create(race_params)
@@ -19,6 +21,17 @@ class CharacterRacesController < ApplicationController
         end
     end
 
+    def edit
+        @race = CharacterRace.find(params[:id])
+    end
+
+    def update
+        @race = find_race
+        @race.update(race_params)
+        redirect_to character_races_path, notice: "#{@race.race_name} updated successfully"
+    end
+
+    #This is how a race is destroyed from the database. Finds the ID of the race chosen and then performs destroy statement
     def destroy
         race = CharacterRace.find(params[:id])
         name = race.race_name

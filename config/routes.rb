@@ -6,5 +6,5 @@ Rails.application.routes.draw do
   # get '/races', to: 'character_races#index', as: 'races'
   # get '/races/new', to: 'character_races#new', as: 'races_new'
   # post '/races/new', to: 'character_races#create', as: 'race_create'
-  resources :character_races, only:[:index, :show, :new, :create, :destroy]
+  resources :character_races, only:[:index, :show, :new, :create, :edit, :update, :destroy]
 end
