@@ -1,1 +1,11 @@
-<p>races go here foo!</p>
+<h1>Races</h1>
+
+<% @races.each do |race| %>
+    <h2><%= race.race_name %></h2>
+    <br>
+    <h4> Description </h4>
+    <p><%= race.description %></p>
+    <h4> Traits </h4>
+    <p><%= race.traits %></p>
+    <br>
+<% end %>

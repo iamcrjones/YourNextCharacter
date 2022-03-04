@@ -12,20 +12,20 @@ class CharacterRacesController < ApplicationController
     def create
         character_race = CharacterRace.create(race_params)
         begin
-        redirect_to races_path, notice: "#{character_race.race_name} created successfully"
+        redirect_to character_races_path, notice: "#{character_race.race_name} created successfully"
         rescue StandardError => e
             puts e.message
-            redirect_to races_path, notice: "#{character_race.race_name} creation unsuccessful"
+            redirect_to character_races_path, notice: "#{character_race.race_name} creation unsuccessful"
         end
     end
 
     def race_params
-        params.permit(:race_name, :description, :traits)
+        params.require(:character_race).permit(:race_name, :description, :traits)
     end
 
     def isAdmin
         if !current_user.admin
-            redirect_to races_path, alert: "You do not have required permissions to access this page"
+            redirect_to character_races_path, alert: "You do not have required permissions to access this page"
         end
     end
 
@@ -35,7 +35,7 @@ class CharacterRacesController < ApplicationController
         rescue StandardError => e
             puts e.message
             #flash[:error] = e.message
-            redirect_to races_path, alert: "This race id #{params[:id]} does not exist in the database"
+            redirect_to character_races_path, alert: "This race id #{params[:id]} does not exist in the database"
         end
     end
 end

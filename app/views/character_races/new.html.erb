@@ -1,6 +1,6 @@
 <h1>Add a New Race</h1>
 
-<%= form_with model: @character_race do |form| %>
+<%= form_for @race do |form| %>
     <div class= "row g-1">
         <%= form.label :race_name%>
         <%= form.text_field :race_name, required:true%>
