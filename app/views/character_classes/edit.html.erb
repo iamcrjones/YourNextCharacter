@@ -1,0 +1,8 @@
+<h1> Edit Class</h1>
+
+<%= simple_form_for @charclass do |f| %>
+    <%= f.input :charclass_name, label: 'Please enter name of class', error: 'Class name is mandtory, please enter one' %>
+    <%= f.input :description, label: 'Enter description of class', as: :text, error: 'Description of class required'%>
+    <%= f.input :bis_stats, label: 'Desired Stats go here.', error: 'Desired Stats are mandatory for classes'%>
+    <%= f.button :submit %>
+<% end %>

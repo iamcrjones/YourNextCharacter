@@ -1,0 +1,11 @@
+<h1>Classes</h1>
+
+<% @charclasses.each do |c| %>
+    <h2><%= link_to c.charclass_name, character_class_path(c.id)%></h2>
+    <br>
+    <h4> Description </h4>
+    <p><%= c.description %></p>
+    <h4> Desired Stats </h4>
+    <p><%= c.bis_stats %></p>
+    <br>
+<% end %>

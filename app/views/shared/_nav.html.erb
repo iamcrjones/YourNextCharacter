@@ -2,11 +2,14 @@
     <div class="container">
         <%=link_to "Home", root_path, class:"navbar-brand" %>
         <%=link_to "Races", character_races_path, class:"navbar-brand"%>
+        <%=link_to "Classes", character_classes_path, class:"navbar-brand"%>
+
         <% if user_signed_in? %>
             <span><%= current_user.username %></span>
             <%=link_to "Sign Out", destroy_user_session_path, method: "delete", class:"navbar-brand" %>
             <% if current_user.admin? %>
                 <%=link_to "New Race", new_character_race_path, class:"navbar-brand" %>
+                <%=link_to "New Class", new_character_class_path, class:"navbar-brand" %>
             <% end %>
         <% else %>
             <%=link_to "Sign In", new_user_session_path, class:"navbar-brand" %>

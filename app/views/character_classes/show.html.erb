@@ -1,0 +1,7 @@
+<h1><%= @charclass.charclass_name%></h1>
+<p>Class Description: <%= @charclass.description%></p>
+<p>Desired stats: <%= @charclass.bis_stats%></p>
+<% if current_user.admin? %>
+    <%= link_to "Delete Class", @charclass, method: "delete", data: {confirm: "Are you sure you want to delete?"} %>
+    <%= link_to "Edit", edit_character_class_path %>
+<% end %>

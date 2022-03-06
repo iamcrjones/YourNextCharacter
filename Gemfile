@@ -64,6 +64,7 @@ gem 'devise'
 
 #Bootstrap for easy styling in a time-sensitive environment to get an MVP
 gem 'bootstrap'
+gem 'popper_js'
 
 gem 'jquery-rails'
 gem 'simple_form'
