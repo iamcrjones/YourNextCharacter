@@ -22,7 +22,7 @@ class CharacterRacesController < ApplicationController
     end
 
     def edit
-        @race = CharacterRace.find(params[:id])
+        @race = find_race
     end
 
     def update
@@ -33,7 +33,7 @@ class CharacterRacesController < ApplicationController
 
     #This is how a race is destroyed from the database. Finds the ID of the race chosen and then performs destroy statement
     def destroy
-        race = CharacterRace.find(params[:id])
+        race = find_race
         name = race.race_name
         race.destroy
         redirect_to character_races_path, notice: "#{name} deleted successfully"
