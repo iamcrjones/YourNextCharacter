@@ -15,10 +15,10 @@ class CharacterSheetsController < ApplicationController
     def create
         @sheet = CharacterSheet.create(sheet_params)
         begin
-        redirect_to character_sheets_path, notice: "#{@sheet.name} created successfully"
+        redirect_to character_sheets_path, notice: "Character created successfully"
         rescue StandardError => e
             puts e.message
-            redirect_to character_sheets_path, notice: "#{@sheet.name} creation unsuccessful"
+            redirect_to character_sheets_path, notice: "Creation unsuccessful"
         end
     end
 
