@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   # post '/races/new', to: 'character_races#create', as: 'race_create'
   resources :character_races, only:[:index, :show, :new, :create, :edit, :update, :destroy]
   resources :character_classes, only:[:index, :show, :new, :create, :edit, :update, :destroy]
+  resources :character_sheets, only:[:index, :show, :new, :create, :edit, :update, :destroy]
 end

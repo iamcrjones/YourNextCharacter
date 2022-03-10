@@ -1,0 +1,11 @@
+<h1>Upload Your Character!</h1>
+
+<%= simple_form_for @sheet do |f| %>
+    <%= f.input :name, label: 'Character name', error: 'Your character must have a name!' %>
+    <%= f.input :description, label: 'Enter description of character', as: :text, error: 'Description of your character is required'%>
+    <%= f.input :level, collection: 1..20, error: 'Level is required'%>
+    <%= f.input :char_race_id, :collection => CharacterRace.all.collect {|c| [c.race_name, c.id]}%>
+    <%= f.input :char_class_id, :collection => CharacterClass.all.collect {|c| [c.charclass_name, c.id]}%>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.button :submit %>
+<% end %>

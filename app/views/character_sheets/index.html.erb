@@ -1,0 +1,11 @@
+<h1>Characters</h1>
+
+<% @sheets.each do |sheet| %>
+    <h2><%= link_to sheet.name, character_sheet_path(sheet.id)%></h2>
+    <br>
+    <h4> Description </h4>
+    <p><%= sheet.description %></p>
+    <h4> Level </h4>
+    <p><%= sheet.level %></p>
+    <br>
+<% end %>
