@@ -3,6 +3,7 @@
         <%=link_to "Home", root_path, class:"navbar-brand" %>
         <%=link_to "Races", character_races_path, class:"navbar-brand"%>
         <%=link_to "Classes", character_classes_path, class:"navbar-brand"%>
+        <%=link_to "Characters", character_sheets_path, class:"navbar-brand"%>
 
         <% if user_signed_in? %>
             <span><%= current_user.username %></span>
