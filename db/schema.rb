@@ -61,15 +61,15 @@ ActiveRecord::Schema.define(version: 2022_03_09_102928) do
 
   create_table "character_sheets", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "char_class_id"
-    t.bigint "char_race_id"
+    t.bigint "character_class_id"
+    t.bigint "character_race_id"
     t.string "name"
     t.integer "level"
     t.string "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["char_class_id"], name: "index_character_sheets_on_char_class_id"
-    t.index ["char_race_id"], name: "index_character_sheets_on_char_race_id"
+    t.index ["character_class_id"], name: "index_character_sheets_on_character_class_id"
+    t.index ["character_race_id"], name: "index_character_sheets_on_character_race_id"
     t.index ["user_id"], name: "index_character_sheets_on_user_id"
   end
 
@@ -90,7 +90,7 @@ ActiveRecord::Schema.define(version: 2022_03_09_102928) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "character_sheets", "character_classes", column: "char_class_id"
-  add_foreign_key "character_sheets", "character_races", column: "char_race_id"
+  add_foreign_key "character_sheets", "character_classes"
+  add_foreign_key "character_sheets", "character_races"
   add_foreign_key "character_sheets", "users"
 end

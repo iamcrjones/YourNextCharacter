@@ -18,7 +18,7 @@ class CharacterSheetsController < ApplicationController
     def create
         @sheet = CharacterSheet.create(sheet_params)
         begin
-        redirect_to character_sheets_path, notice: "Character created successfully"
+            redirect_to character_sheets_path, notice: "Character created successfully"
         rescue StandardError => e
             puts e.message
             redirect_to character_sheets_path, notice: "Creation unsuccessful"
@@ -43,7 +43,7 @@ class CharacterSheetsController < ApplicationController
     end
 
     def sheet_params
-        params.require(:character_sheet).permit(:name, :level, :description, :char_race_id, :char_class_id, :user_id, :sheetupload)
+        params.require(:character_sheet).permit(:name, :level, :description, :character_race_id, :character_class_id,  :user_id, :sheetupload)#, :char_race_id, :char_class_id, :user_id, :sheetupload)
     end
 
     def isAdmin
@@ -64,7 +64,7 @@ class CharacterSheetsController < ApplicationController
 
     # #Determines if the class ID matches the class ID in the character sheet to display the name of that class
     def class_name
-        @sheetfind = find_sheet.char_class_id
+        @sheetfind = find_sheet.character_class_id
         @classes = CharacterClass.all
         @classes.each do |c|
           if c.id == @sheetfind
@@ -77,7 +77,7 @@ class CharacterSheetsController < ApplicationController
 
     # #Determines if the race ID matches the race ID in the character sheet to display the name of that race
      def race_name
-         @sheetfind = find_sheet.char_race_id
+         @sheetfind = find_sheet.character_race_id
          @races = CharacterRace.all
          @races.each do |r|
            if r.id == @sheetfind
