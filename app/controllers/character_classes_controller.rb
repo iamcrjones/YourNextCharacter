@@ -37,9 +37,8 @@ class CharacterClassesController < ApplicationController
     #This is how a race is destroyed from the database. Finds the ID of the race chosen and then performs destroy statement
     def destroy
         charclass = find_charclass
-        name = charclass.charclass_name
         charclass.destroy
-        redirect_to character_classes_path, notice: "#{name} deleted successfully"
+        redirect_to character_classes_path, notice: "Class deleted successfully"
     end
 
     def charclass_params

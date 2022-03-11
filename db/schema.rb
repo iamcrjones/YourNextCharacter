@@ -61,8 +61,8 @@ ActiveRecord::Schema.define(version: 2022_03_09_102928) do
 
   create_table "character_sheets", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "char_class_id", null: false
-    t.bigint "char_race_id", null: false
+    t.bigint "char_class_id"
+    t.bigint "char_race_id"
     t.string "name"
     t.integer "level"
     t.string "description"

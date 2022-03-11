@@ -1,7 +1,8 @@
 <h1><%= @sheet.name %></h1>
 <p>Description: <%= @sheet.description%></p>
-<p>Race: <%= @race_name%></p>
-<p>Class: <%= @class_name%></p>
+<p>Race: <%= @sheetrace %></p>
+<p>Class: <%= @sheetclass %></p>
+<p>Created by: <%= @sheet.user.username %></p>
 <% if !user_signed_in? %>
     <%= link_to "Sign Up to download character or leave a review", new_user_registration_path%>
 <% end %>
