@@ -71,4 +71,5 @@ gem 'simple_form'
 
 #For AWS S3 active storage
 gem 'aws-sdk-s3'
+gem 'aws-sdk'
 

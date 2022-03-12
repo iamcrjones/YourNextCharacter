@@ -11,7 +11,7 @@
 
     <%= f.input :character_class_id, :collection => CharacterClass.all.collect {|c| [c.charclass_name, c.id]}, error: 'Select a Class', required: true %>
 
-    <%= f.file_field :sheetupload, direct_upload: true, accept: 'application/pdf', error: 'You must attach a pdf file.', required: true %>
+    <%= f.file_field :sheetupload, accept: 'application/pdf', error: 'You must attach a pdf file.', required: true %>
 
     <%= f.hidden_field :user_id, value: current_user.id %>
 
