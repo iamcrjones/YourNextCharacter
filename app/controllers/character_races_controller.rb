@@ -4,6 +4,7 @@ class CharacterRacesController < ApplicationController
 
     def index
         @races = CharacterRace.all
+        @race_order = @races.order('race_name ASC')
     end
 
     def new

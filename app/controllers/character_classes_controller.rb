@@ -4,6 +4,7 @@ class CharacterClassesController < ApplicationController
 
     def index
         @charclasses = CharacterClass.all
+        @class_order = @charclasses.order('charclass_name ASC')
     end
 
     def show
