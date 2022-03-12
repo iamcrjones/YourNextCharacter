@@ -7,7 +7,7 @@
     <%= link_to "Sign Up to download character or leave a review", new_user_registration_path%>
 <% end %>
 <% if user_signed_in? %>
-    <p>Character Sheet:<%= link_to "Download", @sheet.sheetupload, download: @sheet.sheetupload.filename %> </p>
+    <p>Character Sheet:<%= link_to "Click here!", @sheet.sheetupload, target: :_blank %> </p>
     <% if (current_user.admin?) or (current_user.id == @sheet.user_id) == true %>
         <%= link_to "Delete Character", @sheet, method: "delete", data: {confirm: "Are you sure you want to delete #{@sheet.name}?"} %>
         <%= link_to "Edit", edit_character_sheet_path %>
