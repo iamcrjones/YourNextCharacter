@@ -1,11 +1,14 @@
 <h1>Classes</h1>
 
+<div class="cards">
 <% @class_order.each do |c| %>
-    <h2><%= link_to c.charclass_name, character_class_path(c.id)%></h2>
-    <br>
-    <h4> Description </h4>
-    <p><%= c.description %></p>
-    <h4> Desired Stats </h4>
-    <p><%= c.bis_stats %></p>
-    <br>
+    <div class="card" style="width: 18rem;">
+        <%# <img src="..." class="card-img-top" alt="..."> %>
+        <div class="card-body">
+            <h4 class="card-title"><%= c.charclass_name %></h4>
+            <p class="card-text"><%= truncate(c.description, :length => 80) %></p>
+            <%= link_to 'More info', character_class_path(c.id), class: 'btn btn-primary'%>
+        </div>
+    </div>
 <% end %>
+</div>
