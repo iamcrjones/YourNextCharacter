@@ -1,3 +1,4 @@
+<h1>My Favourites</h1>
 <% @favourited.each do |fave| %>
     <div class="card" style="width: 18rem;">
         <div class="card-body">
@@ -9,4 +10,7 @@
             <%= link_to 'View Character', character_sheet_path(fave.id), class: 'btn btn-primary'%>
         </div>
     </div>
+<% end %>
+<% if @favourited.length == 0 %>
+    <%= link_to "View characters to add to your favourites!", character_sheets_path %>
 <% end %>
