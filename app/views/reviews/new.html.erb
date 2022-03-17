@@ -1,0 +1,7 @@
+<h1>Write your review!</h1>
+
+<%= simple_form_for [@sheet,@review] do |f| %>
+    <%= f.input :rating, :collection => 1..5, error: 'Your review must have a rating', required: true%>
+    <%= f.input :comment, label: 'Leave a comment', as: :text, error: 'Your character must have a name!', required: true%>
+    <%= f.button :submit %>
+<% end %>

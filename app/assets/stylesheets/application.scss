@@ -16,6 +16,12 @@
 // Custom bootstrap variables must be set or imported *before* bootstrap.
  @import "bootstrap";
 
+
+
+ body {
+    //background-color: #1a1a1d
+ }
+
 .cards {
     display: flex;
     flex-direction: row;

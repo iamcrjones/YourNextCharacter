@@ -2,6 +2,7 @@ class CharacterSheet < ApplicationRecord
   belongs_to :user
   belongs_to :character_class
   belongs_to :character_race
+  has_many :reviews, dependent: :destroy
   #belongs_to :char_class, optional:true
   #belongs_to :char_race, optional:true
   has_one_attached :sheetupload

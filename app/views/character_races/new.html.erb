@@ -1,8 +1,8 @@
 <h1>Add a New Race</h1>
 
 <%= simple_form_for @race do |f| %>
-    <%= f.input :race_name, label: 'Please enter name of race', error: 'Race name is mandtory, please enter one' %>
-    <%= f.input :description, label: 'Enter description of race', as: :text, error: 'Description of race required'%>
-    <%= f.input :traits, label: 'Traits here', error: 'traits mandatory'%>
+    <%= f.input :race_name, label: 'Please enter name of race', error: 'Race name is mandtory, please enter one', required: true %>
+    <%= f.input :description, label: 'Enter description of race', as: :text, error: 'Description of race required', required: true %>
+    <%= f.input :traits, label: 'Traits here', error: 'traits mandatory', required: true %>
     <%= f.button :submit %>
 <% end %>
