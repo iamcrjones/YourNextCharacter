@@ -1,12 +1,13 @@
 <h1>Races</h1>
-
-<% @race_order.each do |race| %>
-    <div class="card" style="width: 18rem;">
-        <%# <img src="..." class="card-img-top" alt="..."> %>
-        <div class="card-body">
-            <h4 class="card-title"><%= race.race_name %></h4>
-            <p class="card-text"><%= truncate(race.description, :length => 80) %></p>
-            <%= link_to 'More info', character_race_path(race.id), class: 'btn btn-primary'%>
+<div class="cards">
+    <% @race_order.each do |race| %>
+        <div class="card" style="width: 18rem;">
+            <%# <img src="..." class="card-img-top" alt="..."> %>
+            <div class="card-body">
+                <h4 class="card-title"><%= race.race_name %></h4>
+                <p class="card-text"><%= truncate(race.description, :length => 80) %></p>
+                <%= link_to 'More info', character_race_path(race.id), class: 'btn btn-primary'%>
+            </div>
         </div>
-    </div>
-<% end %>
+    <% end %>
+</div>
