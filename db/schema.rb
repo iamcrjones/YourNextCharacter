@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_16_091905) do
+ActiveRecord::Schema.define(version: 2022_03_17_014223) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +73,15 @@ ActiveRecord::Schema.define(version: 2022_03_16_091905) do
     t.index ["user_id"], name: "index_character_sheets_on_user_id"
   end
 
+  create_table "favourites", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "character_sheet_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["character_sheet_id"], name: "index_favourites_on_character_sheet_id"
+    t.index ["user_id"], name: "index_favourites_on_user_id"
+  end
+
   create_table "reviews", force: :cascade do |t|
     t.integer "rating"
     t.text "comment"
@@ -104,6 +113,8 @@ ActiveRecord::Schema.define(version: 2022_03_16_091905) do
   add_foreign_key "character_sheets", "character_classes"
   add_foreign_key "character_sheets", "character_races"
   add_foreign_key "character_sheets", "users"
+  add_foreign_key "favourites", "character_sheets"
+  add_foreign_key "favourites", "users"
   add_foreign_key "reviews", "character_sheets"
   add_foreign_key "reviews", "users"
 end

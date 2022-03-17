@@ -10,6 +10,9 @@
             <h5>Rating: <%= r.rating %></h5>
             <p>Comment: <%= r.comment %></p>
             <p>Written by: <%= r.user.username %></p>
+            <% if (current_user.admin?) or (current_user.id == r.user_id)%>
+                <%= link_to "delete review", "/character_sheets/#{@sheet.id}/reviews/#{r.id}", method: "delete", data: {confirm: "Are you sure you want to delete?"} %>
+            <% end %>
         </div>
 <% end %>
 
@@ -18,6 +21,7 @@
 <% end %>
 <% if user_signed_in? %>
     <%= link_to " Add a review", new_character_sheet_review_path(@sheet) %>
+    <%= button_to "Add to favourites", favourites_path, method: "post" %>
     <p>Character Sheet:<%= link_to "Click here!", @sheet.sheetupload, target: :_blank %> </p>
     <% if (current_user.admin?) or (current_user.id == @sheet.user_id) == true %>
         <%= link_to "Delete Character", @sheet, method: "delete", data: {confirm: "Are you sure you want to delete #{@sheet.name}?"} %>

@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   resources :character_sheets, only:[:index, :show, :new, :create, :edit, :update, :destroy] do
     resources :reviews
   end
+  resources :favourites
 end

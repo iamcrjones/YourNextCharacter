@@ -1,7 +1,7 @@
 class ReviewsController < ApplicationController
 
-    before_action :find_sheet
-
+    before_action :find_sheet, only: [:new, :create, :show, :destroy]
+    before_action :find_review, only: [:destroy]
     def new
         puts @sheet.id
         @review = Review.new
@@ -19,6 +19,16 @@ class ReviewsController < ApplicationController
         redirect_to character_sheets_path
     end
 
+    def destroy
+        # @review = @sheet.reviews.all
+        @review.destroy
+        redirect_to character_sheets_path(@sheet)
+        # if @review.user_id == current_user.id
+        #     @review = @sheet.review.id
+        #     redirect_to character_sheets_path(@sheet)
+        # end
+    end
+
     private
 
     def review_params
@@ -27,6 +37,10 @@ class ReviewsController < ApplicationController
 
     def find_sheet
         @sheet = CharacterSheet.find(params[:character_sheet_id])
+    end
+
+    def find_review
+        @review = Review.find(params[:id])
     end
 
 end
