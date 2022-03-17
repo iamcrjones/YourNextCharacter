@@ -1,5 +1,5 @@
 class FavouritesController < ApplicationController
-
+    before_action :authenticate_user! , only: [:create, :destroy, :index]
     before_action :set_sheet, only:[:create, :destroy]
 
     def create

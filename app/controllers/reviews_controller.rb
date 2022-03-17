@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController
-
+    before_action :authenticate_user! , only: [:new, :create, :destroy]
     before_action :find_sheet, only: [:new, :create, :show, :destroy]
     before_action :find_review, only: [:destroy]
     def new

@@ -10,16 +10,19 @@
             <h5>Rating: <%= r.rating %></h5>
             <p>Comment: <%= r.comment %></p>
             <p>Written by: <%= r.user.username %></p>
-            <% if (current_user.admin?) or (current_user.id == r.user_id)%>
-                <%= link_to "delete review", "/character_sheets/#{@sheet.id}/reviews/#{r.id}", method: "delete", data: {confirm: "Are you sure you want to delete?"} %>
+            <% if user_signed_in?%>
+                <% if (current_user.admin?) or (current_user.id == r.user_id)%>
+                    <%= link_to "delete review", "/character_sheets/#{@sheet.id}/reviews/#{r.id}", method: "delete", data: {confirm: "Are you sure you want to delete?"} %>
+                <% end %>
+            <% else %>
+                <%= link_to "Sign Up or Sign In to write a review", new_user_registration_path%>
             <% end %>
         </div>
 <% end %>
 
-<% if !user_signed_in? %>
-    <%= link_to "Sign Up to download character or leave a review", new_user_registration_path%>
-<% end %>
+
 <% if user_signed_in? %>
+    <%= link_to "Add a review", new_character_sheet_review_path(@sheet) %>
     <% unless current_user.favourite_character_sheets.exists?(id: @sheet.id) %>
             <%= link_to 'Add to favorites', favourites_path(character_sheet_id: @sheet.id), method: "post" %>
         <% else %>
@@ -29,7 +32,5 @@
     <% if (current_user.admin?) or (current_user.id == @sheet.user_id) == true %>
         <%= link_to "Delete Character", @sheet, method: "delete", data: {confirm: "Are you sure you want to delete #{@sheet.name}?"} %>
         <%= link_to "Edit", edit_character_sheet_path %>
-    <% else %>
-        <%= link_to "Add a review", new_character_sheet_review_path(@sheet) %>
     <% end %>
 <% end %>
