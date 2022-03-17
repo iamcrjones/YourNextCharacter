@@ -6,10 +6,10 @@ Rails.application.routes.draw do
   # get '/races', to: 'character_races#index', as: 'races'
   # get '/races/new', to: 'character_races#new', as: 'races_new'
   # post '/races/new', to: 'character_races#create', as: 'race_create'
+  resources :favourites, only: [:create, :destroy, :index]
   resources :character_races, only:[:index, :show, :new, :create, :edit, :update, :destroy]
   resources :character_classes, only:[:index, :show, :new, :create, :edit, :update, :destroy]
   resources :character_sheets, only:[:index, :show, :new, :create, :edit, :update, :destroy] do
     resources :reviews
   end
-  resources :favourites
 end

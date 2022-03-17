@@ -1,3 +1,12 @@
-<h1>My favourites</h1>
-
-<%= current_user.favourites%>
+<% @favourited.each do |fave| %>
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h2 class="card-title"><%= fave.name %></h2>
+            <h4> Description </h4>
+            <p class="card-text"><%= truncate(fave.description, :length => 80) %></p>
+            <h4> Level </h4>
+            <p><%= fave.level %></p>
+            <%= link_to 'View Character', character_sheet_path(fave.id), class: 'btn btn-primary'%>
+        </div>
+    </div>
+<% end %>

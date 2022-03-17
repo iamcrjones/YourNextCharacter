@@ -74,11 +74,12 @@ ActiveRecord::Schema.define(version: 2022_03_17_014223) do
   end
 
   create_table "favourites", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "character_sheet_id", null: false
+    t.string "favourited_type"
+    t.bigint "favourited_id"
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["character_sheet_id"], name: "index_favourites_on_character_sheet_id"
+    t.index ["favourited_type", "favourited_id"], name: "index_favourites_on_favourited"
     t.index ["user_id"], name: "index_favourites_on_user_id"
   end
 
@@ -113,8 +114,6 @@ ActiveRecord::Schema.define(version: 2022_03_17_014223) do
   add_foreign_key "character_sheets", "character_classes"
   add_foreign_key "character_sheets", "character_races"
   add_foreign_key "character_sheets", "users"
-  add_foreign_key "favourites", "character_sheets"
-  add_foreign_key "favourites", "users"
   add_foreign_key "reviews", "character_sheets"
   add_foreign_key "reviews", "users"
 end

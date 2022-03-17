@@ -20,12 +20,16 @@
     <%= link_to "Sign Up to download character or leave a review", new_user_registration_path%>
 <% end %>
 <% if user_signed_in? %>
-    <%= link_to " Add a review", new_character_sheet_review_path(@sheet) %>
-    <%= button_to "Add to favourites", favourites_path, method: "post" %>
+    <% unless current_user.favourite_character_sheets.exists?(id: @sheet.id) %>
+            <%= link_to 'Add to favorites', favourites_path(character_sheet_id: @sheet.id), method: "post" %>
+        <% else %>
+            <%= link_to 'Remove from favorites', favourite_path(@sheet), method: "delete" %>
+    <% end %>
     <p>Character Sheet:<%= link_to "Click here!", @sheet.sheetupload, target: :_blank %> </p>
     <% if (current_user.admin?) or (current_user.id == @sheet.user_id) == true %>
         <%= link_to "Delete Character", @sheet, method: "delete", data: {confirm: "Are you sure you want to delete #{@sheet.name}?"} %>
         <%= link_to "Edit", edit_character_sheet_path %>
     <% else %>
+        <%= link_to "Add a review", new_character_sheet_review_path(@sheet) %>
     <% end %>
 <% end %>
