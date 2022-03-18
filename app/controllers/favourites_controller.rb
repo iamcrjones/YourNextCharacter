@@ -4,7 +4,7 @@ class FavouritesController < ApplicationController
 
     def create
         if Favourite.create(favourited: @sheet, user: current_user)
-        redirect_to @sheet, notice: 'Project has been favorited'
+        redirect_to @sheet, notice: "#{@sheet.name} has been favourited"
         else
         redirect_to @sheet, alert: 'Something went wrong...*sad panda*'
         end
@@ -12,7 +12,7 @@ class FavouritesController < ApplicationController
 
     def destroy
         Favourite.where(favourited_id: @sheet.id, user_id: current_user.id).first.destroy
-        redirect_to @sheet, notice: 'Character is no longer in favorites'
+        redirect_to @sheet, notice: "#{@sheet.name} is no longer in favourites"
     end
 
     def index

@@ -24,9 +24,9 @@
 <% if user_signed_in? %>
     <%= link_to "Add a review", new_character_sheet_review_path(@sheet) %>
     <% unless current_user.favourite_character_sheets.exists?(id: @sheet.id) %>
-            <%= link_to 'Add to favorites', favourites_path(character_sheet_id: @sheet.id), method: "post" %>
+            <%= link_to 'Add to favourites', favourites_path(character_sheet_id: @sheet.id), method: "post" %>
         <% else %>
-            <%= link_to 'Remove from favorites', favourite_path(@sheet), method: "delete" %>
+            <%= link_to 'Remove from favourites', favourite_path(@sheet), method: "delete" %>
     <% end %>
     <p>Character Sheet:<%= link_to "Click here!", @sheet.sheetupload, target: :_blank %> </p>
     <% if (current_user.admin?) or (current_user.id == @sheet.user_id) == true %>
