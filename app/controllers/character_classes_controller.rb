@@ -1,5 +1,6 @@
 class CharacterClassesController < ApplicationController
     before_action :find_charclass, only:[:show]
+    before_action :authenticate_user! , only: [:new, :create, :edit, :update, :destroy]
     before_action :isAdmin , only: [:new, :create, :edit, :update, :destroy]
 
     def index
