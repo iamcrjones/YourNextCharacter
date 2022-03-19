@@ -11,7 +11,7 @@ class CharacterSheet < ApplicationRecord
   accepts_nested_attributes_for :character_class
   accepts_nested_attributes_for :character_race
 
-  #Returns the average rating of a character sheet from its reviews.
+  #Returns the average rating of a character sheet from its reviews by adding the rating of all reviews together and then dividing that number by the number of reviews.
   def average_rating
     if self.reviews.count == 0
         return 0
