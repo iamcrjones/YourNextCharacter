@@ -33,4 +33,6 @@
         <%= link_to "Delete Character", @sheet, method: "delete", data: {confirm: "Are you sure you want to delete #{@sheet.name}?"} %>
         <%= link_to "Edit", edit_character_sheet_path %>
     <% end %>
+<% else %>
+    <%= link_to "Sign up to view character sheets and leave reviews.", new_user_registration_path %>
 <% end %>

@@ -1,5 +1,5 @@
 class CharacterSheetsController < ApplicationController
-    before_action :find_sheet , only: [:show]
+    before_action :find_sheet , only: [:show, :edit, :update, :destroy]
     before_action :class_name , only: [:show]
     before_action :race_name, only: [:show]
     before_action :authenticate_user! , only: [:new, :create, :edit, :update, :destroy]
@@ -8,13 +8,13 @@ class CharacterSheetsController < ApplicationController
     end
 
     def show
-        #race_name
     end
 
     def new
         @sheet = CharacterSheet.new
     end
 
+    # Creation of a chracter sheet which must pass through the parameters set.
     def create
         @sheet = CharacterSheet.create(sheet_params)
         begin
@@ -25,33 +25,33 @@ class CharacterSheetsController < ApplicationController
         end
     end
 
+    #The edit method first checks if the user is an Admin or if their user ID matches the user ID the character sheet is attached to. If this comes back false they will be redirected and given notice that they do not have permission.
     def edit
-        @sheet = find_sheet
+        if (current_user.admin?) or (current_user.id == @sheet.user_id) == true
+            puts "Permissions accepted"
+        else
+            redirect_to character_sheets_path, alert: "You do not have required permissions to access this page"
+        end
     end
 
+    # Updates the attributes of the parameters passed through.
     def update
-        @sheet = find_sheet
         @sheet.update(sheet_params)
         redirect_to character_sheets_path, notice: "#{@sheet.name} updated successfully"
     end
 
+    # Destroys the target character sheet
     def destroy
-        charsheet = find_sheet
-        name = charsheet.name
-        charsheet.destroy
-        redirect_to character_sheets_path, notice: "#{name} deleted successfully"
+        @sheet.destroy
+        redirect_to character_sheets_path, notice: "#{@sheet.name} deleted successfully"
     end
 
+    #These are the parameters that must be passed through in order for a character sheet to be created or updated in the database. It takes foreign keys from races, classes, and the user id so that any information edited about those foreign keys also updated the information on the character sheet.
     def sheet_params
-        params.require(:character_sheet).permit(:name, :level, :description, :character_race_id, :character_class_id,  :user_id, :sheetupload)#, :char_race_id, :char_class_id, :user_id, :sheetupload)
+        params.require(:character_sheet).permit(:name, :level, :description, :character_race_id, :character_class_id,  :user_id, :sheetupload)
     end
 
-    def isAdmin
-        if !current_user.admin
-            redirect_to character_races_path, alert: "You do not have required permissions to access this page"
-        end
-    end
-
+    # This is the method used to find which character sheet is currently being requested for an action. It finds the character sheet by using the find function with the parameter of ID being passed through.
     def find_sheet
         begin
             @sheet = CharacterSheet.find(params[:id])
@@ -71,8 +71,6 @@ class CharacterSheetsController < ApplicationController
                @sheetclass = c.charclass_name
           end
        end
-       # sheet_race_id = find_sheet.char_race_id
-       # @race = ''
    end
 
     # #Determines if the race ID matches the race ID in the character sheet to display the name of that race
@@ -84,7 +82,5 @@ class CharacterSheetsController < ApplicationController
                 @sheetrace = r.race_name
            end
         end
-        # sheet_race_id = find_sheet.char_race_id
-        # @race = ''
     end
 end

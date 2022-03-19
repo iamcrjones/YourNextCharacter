@@ -1,10 +1,11 @@
 class CharacterRacesController < ApplicationController
-    before_action :find_race, only:[:show]
+    before_action :find_race, only:[:show, :edit, :update, :destroy]
     before_action :authenticate_user! , only: [:new, :create, :edit, :update, :destroy]
     before_action :isAdmin , only: [:new, :create, :edit, :update, :destroy]
 
     def index
         @races = CharacterRace.all
+        # This orders all of the races by name in ascending order for the index.
         @race_order = @races.order('race_name ASC')
     end
 
@@ -12,7 +13,7 @@ class CharacterRacesController < ApplicationController
         @race = CharacterRace.new
     end
 
-    # Method for creating a race. Only an Admin is able to add or edit any data relating to races as they are set already.
+    # Method for creating a race. Only an Admin is able to perform any CRUD operations to races as regular users do not have authorization for this.
     def create
         character_race = CharacterRace.create(race_params)
         begin
@@ -24,33 +25,26 @@ class CharacterRacesController < ApplicationController
     end
 
     def edit
-        @race = find_race
     end
 
+    # Updates the Race with the required attributes passed through by params.
     def update
-        @race = find_race
         @race.update(race_params)
         redirect_to character_races_path, notice: "#{@race.race_name} updated successfully"
     end
 
     #This is how a race is destroyed from the database. Finds the ID of the race chosen and then performs destroy statement
     def destroy
-        race = find_race
-        name = race.race_name
-        race.destroy
-        redirect_to character_races_path, notice: "#{name} deleted successfully"
+        @race.destroy
+        redirect_to character_races_path, notice: "#{@race.race_name} deleted successfully"
     end
 
+    #The parameters that must be passed through in order for a race to be created or updated.
     def race_params
         params.require(:character_race).permit(:race_name, :description, :traits)
     end
 
-    def isAdmin
-        if !current_user.admin
-            redirect_to character_races_path, alert: "You do not have required permissions to access this page"
-        end
-    end
-
+    # This is the method used to find which race is currently being requested for an action. It finds the race by using the find function with the parameter of ID being passed through.
     def find_race
         begin
             @race = CharacterRace.find(params[:id])

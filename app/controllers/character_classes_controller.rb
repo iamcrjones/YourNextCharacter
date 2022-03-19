@@ -1,10 +1,11 @@
 class CharacterClassesController < ApplicationController
-    before_action :find_charclass, only:[:show]
+    before_action :find_charclass, only:[:show, :edit, :update, :destroy]
     before_action :authenticate_user! , only: [:new, :create, :edit, :update, :destroy]
     before_action :isAdmin , only: [:new, :create, :edit, :update, :destroy]
 
     def index
         @charclasses = CharacterClass.all
+        # Orders all of the character classes by name in ascending order.
         @class_order = @charclasses.order('charclass_name ASC')
     end
 
@@ -15,7 +16,7 @@ class CharacterClassesController < ApplicationController
         @charclass = CharacterClass.new
     end
 
-    # Method for creating a race. Only an Admin is able to add or edit any data relating to races as they are set already.
+    # Method for creating a class. Only an Admin is able to perform any CRUD operations to races or classes as these should not be editable by regular users.
     def create
         character_class = CharacterClass.create(charclass_params)
         begin
@@ -27,32 +28,26 @@ class CharacterClassesController < ApplicationController
     end
 
     def edit
-        find_charclass
     end
 
+    # Updates the target class found by find_charclass passing through the params.
     def update
-        @charclass = find_charclass
         @charclass.update(charclass_params)
         redirect_to character_classes_path, notice: "#{@charclass.charclass_name} updated successfully"
     end
 
-    #This is how a race is destroyed from the database. Finds the ID of the race chosen and then performs destroy statement
+    #This is how a class is destroyed from the database. Finds the ID of the race chosen and then performs destroy statement
     def destroy
-        charclass = find_charclass
-        charclass.destroy
-        redirect_to character_classes_path, notice: "Class deleted successfully"
+        @charclass.destroy
+        redirect_to character_classes_path, notice: "#{@charclass.charclass_name} deleted successfully"
     end
 
+    #Parameters that must be passed through in order for a class to be created or updated
     def charclass_params
         params.require(:character_class).permit(:charclass_name, :description, :bis_stats)
     end
 
-    def isAdmin
-        if !current_user.admin
-            redirect_to character_classes_path, alert: "You do not have required permissions to access this page"
-        end
-    end
-
+    # This is the method used to find which class is currently being requested for an action. It finds the class by using the find function with the parameter of ID being passed through.
     def find_charclass
         begin
             @charclass = CharacterClass.find(params[:id])

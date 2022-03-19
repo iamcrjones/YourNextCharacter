@@ -2,11 +2,25 @@ class CharacterSheet < ApplicationRecord
   belongs_to :user
   belongs_to :character_class
   belongs_to :character_race
+
   has_many :reviews, dependent: :destroy
-  #belongs_to :char_class, optional:true
-  #belongs_to :char_race, optional:true
+
+  #Attribute for PDF file upload to AWS
   has_one_attached :sheetupload
+
   accepts_nested_attributes_for :character_class
   accepts_nested_attributes_for :character_race
+
+  #Returns the average rating of a character sheet from its reviews.
+  def average_rating
+    if self.reviews.count == 0
+        return 0
+    end
+    rating_sum = 0
+    self.reviews.each do |r|
+        rating_sum += r.rating
+    end
+    return rating_sum / self.reviews.count
+  end
 
 end

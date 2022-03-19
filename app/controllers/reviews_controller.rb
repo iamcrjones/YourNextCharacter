@@ -7,6 +7,7 @@ class ReviewsController < ApplicationController
         @review = Review.new
     end
 
+    # Creates a review for the currently displayed character sheet. Each review belongs to the user ID who created it.
     def create
         @review = current_user.reviews.new
         @review.character_sheet_id = @sheet.id
@@ -14,23 +15,18 @@ class ReviewsController < ApplicationController
         @review.comment = review_params[:comment]
         puts @review
         @review.save
-        # @review.character_sheet_id = @sheet.id
-        # @review.user_id = current_user.id
         redirect_to character_sheets_path
     end
 
+    #Destroys the target review. Only an admin or the review creator can see the link to destroy.
     def destroy
-        # @review = @sheet.reviews.all
         @review.destroy
         redirect_to character_sheets_path(@sheet)
-        # if @review.user_id == current_user.id
-        #     @review = @sheet.review.id
-        #     redirect_to character_sheets_path(@sheet)
-        # end
     end
 
     private
 
+    # The params to be passed through for creating a review.
     def review_params
         params.require(:review).permit(:rating, :comment)
     end
